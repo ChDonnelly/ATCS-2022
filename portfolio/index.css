@@ -1,0 +1,22 @@
+.about_content {
+    display:inline;
+    padding: 30px 30px 30px 30px;
+    margin-left:150px;
+    position: relative;
+}
+
+
+
+.links {
+
+
+    width:90vw;
+    display:flex;
+    justify-content:space-between;
+    
+}
+
+body {
+    background-color:blanchedalmond;
+    
+}
