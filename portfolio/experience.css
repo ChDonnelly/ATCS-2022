@@ -1,0 +1,18 @@
+img {
+    height:600px;
+    width:250px;
+}
+
+body {
+    background-image: -webkit-linear-gradient(50deg, white 65%, rgb(78,139,237) 75%);
+
+}
+
+#brackets {
+    display:flex;
+    flex-direction:column;
+}
+
+#writing-exper {
+    padding-top:120px;
+}

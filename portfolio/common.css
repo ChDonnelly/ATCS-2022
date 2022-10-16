@@ -1,0 +1,16 @@
+body {
+
+    background-image: -webkit-linear-gradient(50deg, rgb(226, 123, 123) 40%, rgb(78,139,237) 50%);
+}
+
+.container {
+    display:flex;
+    flex-direction:row;
+    justify-content:center;
+    
+}
+
+h1 {
+    font-size:50px;
+}
+
