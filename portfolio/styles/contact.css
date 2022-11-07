@@ -1,0 +1,22 @@
+.container {
+    padding-top: 250px;
+}
+
+.contact_info {
+    margin-left: 50px;
+}
+
+.row {
+    margin-top: 200px;
+}
+
+
+img {
+    width: 120px;
+    height: 400px;
+}
+
+.card-padding {
+    padding-left: 20px;
+    padding-right: 20px;
+}

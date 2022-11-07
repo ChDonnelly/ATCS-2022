@@ -1,0 +1,54 @@
+.card-img-top {
+
+    margin: auto;
+    padding-top: 50px;
+    width: 340px;
+    height: 570px;
+}
+
+#aboutme_text {
+    padding-top: 100px;
+    padding-left:150px;
+    font-family: "Times New Roman", Times, serif;
+}
+
+
+body {
+    background-image: url("https://dynamic-media-cdn.tripadvisor.com/media/photo-o/15/24/a9/4d/looking-down-the-coastline.jpg?w=1200&h=1200&s=1");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: cover;
+}
+
+.row {
+    padding-top: 100px;
+    justify-content: center;
+}
+
+.fading_style {
+    background-image: -webkit-linear-gradient(45deg, rgb(28, 97, 38) 40%, rgb(168, 146, 146) 50%);
+    background-size: 400% 400%;
+    animation: gradient 5s ease infinite;
+    height: fit-content;
+    height: 60vh;
+
+}
+
+
+.row {
+    justify-content: space-around;
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}

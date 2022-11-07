@@ -1,0 +1,44 @@
+/*
+NOTE: The following code (and the similar code in aboutme.css) for an animated background gradient was taken and
+modified from this website: https://codepen.io/P1N2O/pen/pyBNzX
+*/
+
+body {
+    background-image: -webkit-linear-gradient(45deg, rgb(226, 123, 123) 40%, rgb(78, 139, 237) 50%);
+    background-size: 400% 400%;
+    animation: gradient 5s ease infinite;
+    height: 100vh;
+
+}
+
+@keyframes gradient {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+
+.container {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+}
+
+h1 {
+    font-family: 'Times New Roman', Times, serif;
+    font-size: 50px;
+
+}
+
+p {
+    font-family: 'Times New Roman', Times, serif;
+}
