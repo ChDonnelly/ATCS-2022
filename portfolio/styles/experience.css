@@ -1,0 +1,18 @@
+.exp_slide {
+    height:600px;
+}
+
+#writing_exp {
+    width:900px;
+}
+
+#brackets {
+    display: flex;
+    flex-direction: column;
+}
+
+.carousel {
+    padding-left: 500px;
+    padding-right: 10px;
+    padding-top: 50px;
+}
