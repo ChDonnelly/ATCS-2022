@@ -3,6 +3,12 @@ from database import init_db, db_session
 from datetime import datetime
 
 class Twitter:
+
+
+
+    def __init__(self):
+        self.logged_in = False
+        self.current_user = None
     """
     The menu to print once a user has logged in
     """
@@ -55,7 +61,9 @@ class Twitter:
                 print("Those passwords don't match. Try again. \n")
         print("Hey Chris, to check handle: " + handle + " " + password_1)
         new_user = User(handle,password_1)
-        db_session.push() #Check this line!
+        db_session.add(new_user) #Check this line
+        db_session.commit() #Check this line!
+
             
         
 
@@ -64,38 +72,77 @@ class Twitter:
     is guaranteed to be logged in after this function.
     """
     def login(self):
-        logged_in = False
-        while logged_in != True:
+        user = None
+        while self.logged_in == False:
             username_check = input("Username: ")
             password_check = input("Password: ")
-            #query for username
-            if (len(db_session.query(User).where(User.username == username_check).first()) == 0 or len(db_session.query(User).where(User.password == password_check).first()) == 0):
+            user = db_session.query(User).where(User.username == username_check).first()
+            if user == None or user.password != password_check:
                 print("Invalid username or password")
             else:
-                #Actually log them in
-                logged_in = True
-        print("Wecome " + username_check)
+                self.current_user = user
+                self.logged_in = True
+        print("Welcome" + user.username)
+
         
-
-
-
 
     
     def logout(self):
-        pass
+        self.logged_in = False
+        self.current_user = None
 
     """
     Allows the user to login,  
     register, or exit.
     """
     def startup(self):
-        pass
+        user_input = int(input("Welcome to ATCS Twitter!\n Please select a Menu Option\1. Login\n 2. Register User\n 0. Exit"))
+        if user_input == 0:
+            #do exit stuff
+            pass
+        if user_input == 2:
+            self.register_user()
+        if user_input == 1:
+            self.login()
+            
+      
+
+
+
 
     def follow(self):
-        pass
+        other_user = input("Who would you like to follow?\n")
+        #Check if they follow them
+        #get the user
+        following_user = False
+        for follower in self.current_user.following:
+            if follower.username == other_user:
+                print("You already follow " + other_user)
+                following_user = True
+        if following_user == False:
+            #Query user database
+            user = db_session.query(User).where(User.username == other_user).first()
+            self.current_user.following.append(user)
+
+
+
+
+        
+            
+
+
 
     def unfollow(self):
-        pass
+        unfollowed_user = input("Who would you like to unfollow?")
+        following = False
+        for follower in self.current_user.following:
+            if follower.username == unfollowed_user:
+                following = True
+        
+
+        
+
+        
 
     def tweet(self):
         pass
