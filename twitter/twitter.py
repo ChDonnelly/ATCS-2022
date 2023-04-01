@@ -168,7 +168,7 @@ class Twitter:
     """
     Prints the 5 most recent tweets of the 
     people the user follows
-    """
+    """ 
     def view_feed(self):
         feed = db_session.query(Tweet).join(Follower,Tweet.username == Follower.following_id).where(Follower.follower_id == self.current_user.username).order_by(Tweet.id.desc()).limit(5)
         self.print_tweets(feed)
