@@ -26,50 +26,54 @@ class User(Base):
                              secondaryjoin="User.username==Follower.follower_id",
                              overlaps="following")
     
-    tweets = relationship("User",
-                          secondary = "Tweet",
-                          primaryjoin = "User.username ==Tweet.username")
-    
+    tweets = relationship("Tweet")
+
+     #inside the tweet class, where are my user objects
+    #looks for foreign key that matches (looks for foreign key var that matches it)
+
+
+
     def __init__(self,username,password):
         self.username = username
         self.password = password
     def __repr__(self):
-        print("@" + self.username)
+        return "@ + self.username"
 
  
 class Follower(Base):
     __tablename__ = "followers"
-
+   
     # Columns
     id = Column("id", INTEGER, primary_key=True)
     follower_id = Column('follower_id', TEXT, ForeignKey('users.username'))
     following_id = Column('following_id', TEXT, ForeignKey('users.username'))
 
+  
+
 class Tweet(Base):
     __tablename__ = "tweets"
 
     #Columns
-    id = Column("id",TEXT,primary_key = True)
+    id = Column("id",INTEGER,primary_key = True)
     content = Column("content",TEXT,nullable=False)
-    timestamp = Column("timestamp",TEXT,nullable=False)
+    timestamp = Column("timestamp",DATETIME,nullable=False)
     username = Column("username",ForeignKey("users.username"))
+    tags = relationship("Tag",secondary="tweettags",back_populates="tweets")
+    user = relationship("User",back_populates="tweets")
 
-    tweet_tags = relationship("Tweet",
-                              secondary = "tweet_tags",
-                              primaryjoin = "Tweet.id == TweetTag.tweet_id",
-                              )
-
-
-
-
-
-    #username = Column("username", TEXT, primary_key=True)
+    def __init__(self,content,timestamp,username):
+        self.content = content
+        self.timestamp = timestamp
+        self.username = username
+        
     def __repr__(self):
-        #QUESTION: HOW DO i CALL THESE REPR FUNCTIONS? Also, what about the tags here, too?
-        print(self.username)
-        print(self.content)
-        print(self.timestamp)
+        tag_content = [tag.__repr__() for tag in self.tags]
+        return self.username + "\n" + self.content + "\n" + " ".join(tag_content) + "\n" + self.timestamp.strftime("%m-%d-%Y %H:%M:%S:%f")
 
+
+
+       
+        
 
 
     # TODO: Complete the class
@@ -78,23 +82,28 @@ class Tweet(Base):
 class Tag(Base):
     # TODO: Complete the class
     __tablename__ = "tags"
-    id = Column("id",TEXT,primary_key = True)
+    id = Column("id",INTEGER,primary_key = True)
     content = Column("content",TEXT,nullable = False)
     
     def __repr__(self):
-        print("#" + self.content)
+        return "#" + self.content
+    
+   
 
+    tweets = relationship("Tweet",secondary="tweettags",back_populates = "tags")
+    #tweets = relationship("Tag",secondary = "tweettags",back_populates = "tags")
+
+    def __init__(self,content):
+        self.content = content
 
 class TweetTag(Base):
     # TODO: Complete the class
-    __tablename__ = "tweet_tags"
+    __tablename__ = "tweettags"
     #Columns
-    id = Column("id",TEXT,primary_key = True)
+    id = Column("id",INTEGER,primary_key = True)
     tweet_id = Column("tweet_id",ForeignKey("tweets.id"))
     tag_id = Column("tag_id",ForeignKey("tags.id"))
 
-    tags = relationship("TweetTag",
-                        secondary= "tags",
-                        primaryjoin = "TweetTag.tag_id ==Tag.id")
+    
  
 
